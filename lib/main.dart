@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/project/constants/colors.dart';
+import 'package:todo_list/project/screens/home_screen.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,13 +11,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Text("Hello World"),
-        ),
-      ),
+      home: const HomeScreen(),
+      theme: ThemeData(primaryColor: AppColors.primiaryColor),
     );
   }
 }
