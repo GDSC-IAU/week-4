@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo_list/project/widgets/detail_box.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -12,13 +13,49 @@ class HomeScreen extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 _buildAppBar(),
+                const Padding(
+                  padding: EdgeInsets.all(12.0),
+                  child: Text(
+                    "Today Tasks",
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                _buildTaskTracker(),
+                const SizedBox(
+                  height: 15,
+                ),
+                
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Row _buildTaskTracker() {
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        DetailBox(
+          title: "Created tasks",
+          counter: 1,
+        ),
+        DetailBox(
+          title: "Completed tasks",
+          counter: 1,
+          crossAxisAlignment: CrossAxisAlignment.end,
+        ),
+      ],
     );
   }
 
@@ -33,7 +70,7 @@ class HomeScreen extends StatelessWidget {
             size: 30,
           ),
         ),
-        Text(
+        const Text(
           "Tasks",
           style: TextStyle(
             fontSize: 20,
