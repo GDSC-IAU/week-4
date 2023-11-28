@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:todo_list/project/constants/colors.dart';
+import 'package:todo_list/project/providers/tasks_provider.dart';
 import 'package:todo_list/project/screens/home_screen.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => TaskProvider(),
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -11,10 +18,16 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    final ThemeData theme = ThemeData();
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: const HomeScreen(),
-      theme: ThemeData(primaryColor: AppColors.primiaryColor),
+      theme: theme.copyWith(
+        primaryColor: AppColors.primiaryColor,
+        colorScheme: theme.colorScheme.copyWith(
+          secondary: AppColors.secondaryColor,
+        ),
+      ),
     );
   }
 }

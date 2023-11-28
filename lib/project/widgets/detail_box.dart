@@ -18,14 +18,14 @@ class DetailBox extends StatelessWidget {
       children: [
         Text(
           counter.toString().padLeft(2, '0'),
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.grey,
             fontSize: 18,
           ),
@@ -33,5 +33,4 @@ class DetailBox extends StatelessWidget {
       ],
     );
   }
-
 }
