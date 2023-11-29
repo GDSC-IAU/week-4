@@ -8,7 +8,7 @@ A simple todo list app, you can create, edit, read, and delete with easy user in
 - Manage a task easily with CRUD operations. 
 
 ## Dependency used
-- `provider dependency`
+- `provider`
 
 ## Screen shots
 
