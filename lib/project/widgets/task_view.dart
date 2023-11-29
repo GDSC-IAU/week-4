@@ -15,7 +15,7 @@ class TaskView extends StatelessWidget {
   Widget build(BuildContext context) {
     final TaskProvider taskProvider =
         Provider.of<TaskProvider>(context, listen: false);
-    final DateTime dueDate = task.dueDate;
+    final TimeOfDay dueTime = task.dueTime;
 
     const boxDecoration = BoxDecoration(
       border: Border(
@@ -41,7 +41,7 @@ class TaskView extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          'Due at ${dueDate.hour.toString().padLeft(2, '0')}:${dueDate.minute.toString().padLeft(2, '0')}',
+          'Due at ${dueTime.hour.toString().padLeft(2, '0')}:${dueTime.minute.toString().padLeft(2, '0')}',
         ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,

@@ -10,9 +10,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F5F9),
+      appBar: _buildAppBar(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/create');
+        },
+        tooltip: 'Create a task',
         child: const Icon(Icons.add),
       ),
       body: SafeArea(
@@ -22,7 +25,7 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _buildAppBar(),
+                // _buildAppBar(),
                 const Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Text(
@@ -40,26 +43,60 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 15,
                 ),
-                Consumer<TaskProvider>(
-                  builder: (_, provider, __) {
-                    final tasks = provider.tasks;
-                    return ListView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      itemCount: tasks.length,
-                      itemBuilder: (_, index) {
-                        return TaskView(
-                          task: tasks[index],
-                        );
-                      },
-                    );
-                  },
-                )
+                buildTasks()
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Consumer<TaskProvider> buildTasks() {
+    return Consumer<TaskProvider>(
+      builder: (_, provider, __) {
+        final tasks = provider.tasks;
+        return ListView.builder(
+          physics: const NeverScrollableScrollPhysics(),
+          shrinkWrap: true,
+          itemCount: tasks.length,
+          itemBuilder: (_, index) {
+            return TaskView(
+              task: tasks[index],
+            );
+          },
+        );
+      },
+    );
+  }
+
+  AppBar _buildAppBar() {
+    return AppBar(
+      leading: IconButton(
+        onPressed: () {},
+        icon: const Icon(
+          Icons.menu,
+          size: 30,
+        ),
+      ),
+      title: const Text(
+        "Todo",
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      actions: [
+        IconButton(
+          padding: const EdgeInsets.only(right: 24),
+          onPressed: () {},
+          icon: const Icon(
+            Icons.notifications_outlined,
+            size: 30,
+          ),
+        )
+      ],
+      automaticallyImplyLeading: false,
     );
   }
 
@@ -81,34 +118,5 @@ class HomeScreen extends StatelessWidget {
         ],
       );
     });
-  }
-
-  Widget _buildAppBar() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.menu,
-            size: 30,
-          ),
-        ),
-        const Text(
-          "Todo",
-          style: TextStyle(
-            fontSize: 20,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.notifications_outlined,
-            size: 30,
-          ),
-        )
-      ],
-    );
   }
 }

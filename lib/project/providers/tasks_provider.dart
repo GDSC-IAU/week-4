@@ -5,15 +5,15 @@ class TaskProvider with ChangeNotifier {
   final List<Task> tasks = [
     Task(
       taskName: 'View Task App',
-      dueDate: DateTime.now().copyWith(hour: 23, minute: 59),
+      dueTime: const TimeOfDay(hour: 23, minute: 59),
     ),
     Task(
       taskName: 'Read a book',
-      dueDate: DateTime.now().copyWith(hour: 19, minute: 59),
+      dueTime: const TimeOfDay(hour: 19, minute: 59),
     ),
     Task(
       taskName: 'Study Physics',
-      dueDate: DateTime.now().copyWith(hour: 15, minute: 59),
+      dueTime: const TimeOfDay(hour: 15, minute: 59),
     ),
   ];
   Task? selectedTask;

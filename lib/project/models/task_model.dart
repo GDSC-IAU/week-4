@@ -1,12 +1,14 @@
+import 'package:flutter/material.dart';
+
 class Task {
   String taskName;
   String taskDescription;
-  DateTime dueDate;
+  TimeOfDay dueTime;
   bool isCompleted;
 
   Task({
     required this.taskName,
-    required this.dueDate,
+    required this.dueTime,
     this.taskDescription = "",
     this.isCompleted = false,
   });
