@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:todo_list/project/models/task_model.dart';
-import 'package:todo_list/project/providers/tasks_provider.dart';
 import 'package:todo_list/project/widgets/custom_input_field.dart';
 
-class CreateTaskScreen extends StatefulWidget {
-  const CreateTaskScreen({super.key});
+typedef TaskCallback = void Function(
+  BuildContext context,
+  String title,
+  String description,
+  TimeOfDay time,
+);
+
+class ManageTaskScreen extends StatefulWidget {
+  final TaskCallback callback;
+  final Task? task;
+  final String buttonLabel;
+  final String appBarTitle;
+
+  const ManageTaskScreen({
+    required this.buttonLabel,
+    required this.appBarTitle,
+    required this.callback,
+    this.task,
+    super.key,
+  });
 
   @override
-  State<CreateTaskScreen> createState() => _CreateTaskScreenState();
+  State<ManageTaskScreen> createState() => _ManageTaskScreenState();
 }
 
-class _CreateTaskScreenState extends State<CreateTaskScreen> {
+class _ManageTaskScreenState extends State<ManageTaskScreen> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
@@ -20,6 +36,14 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
 
   @override
   void initState() {
+    Task? task = widget.task;
+
+    if (task != null) {
+      selectedTime = task.dueTime;
+      titleController.text = task.taskName;
+      descriptionController.text = task.taskDescription;
+    }
+
     updateDate();
     super.initState();
   }
@@ -111,19 +135,16 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
       child: ElevatedButton(
         onPressed: () {
           if (!formKey.currentState!.validate()) return;
-          final taskProvider =
-              Provider.of<TaskProvider>(context, listen: false);
-          final task = Task(
-            taskName: titleController.text,
-            taskDescription: descriptionController.text,
-            dueTime: selectedTime,
+          widget.callback(
+            context,
+            titleController.text,
+            descriptionController.text,
+            selectedTime,
           );
-          taskProvider.addTask(task);
-          Navigator.maybePop(context);
         },
-        child: const Text(
-          "Create",
-          style: TextStyle(
+        child: Text(
+          widget.buttonLabel,
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -155,9 +176,9 @@ class _CreateTaskScreenState extends State<CreateTaskScreen> {
 
   AppBar _buildAppBar() {
     return AppBar(
-      title: const Text(
-        "Create a task",
-        style: TextStyle(
+      title: Text(
+        widget.appBarTitle,
+        style: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),

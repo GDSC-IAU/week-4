@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list/project/models/task_model.dart';
 import 'package:todo_list/project/providers/tasks_provider.dart';
 import 'package:todo_list/project/widgets/detail_box.dart';
 import 'package:todo_list/project/widgets/task_view.dart';
@@ -13,7 +14,7 @@ class HomeScreen extends StatelessWidget {
       appBar: _buildAppBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, '/create');
+          Navigator.pushNamed(context, '/create', arguments: [onSubmit]);
         },
         tooltip: 'Create a task',
         child: const Icon(Icons.add),
@@ -118,5 +119,21 @@ class HomeScreen extends StatelessWidget {
         ],
       );
     });
+  }
+
+  void onSubmit(
+    BuildContext context,
+    String title,
+    String description,
+    TimeOfDay time,
+  ) {
+    final taskProvider = Provider.of<TaskProvider>(context, listen: false);
+    final task = Task(
+      taskName: title,
+      taskDescription: description,
+      dueTime: time,
+    );
+    taskProvider.addTask(task);
+    Navigator.maybePop(context);
   }
 }

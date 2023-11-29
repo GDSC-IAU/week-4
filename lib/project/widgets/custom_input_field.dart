@@ -4,7 +4,7 @@ class CustomInputField extends StatelessWidget {
   final bool readonly;
   final TextEditingController controller;
   final String label;
-  final maxLines;
+  final int maxLines;
   final VoidCallback? onTap;
   final FormFieldValidator<String>? validator;
 

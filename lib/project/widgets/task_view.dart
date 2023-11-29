@@ -49,7 +49,11 @@ class TaskView extends StatelessWidget {
             IconButton(
               onPressed: () {
                 taskProvider.selectedTask = task;
-                // TODO push to edit task page
+                Navigator.pushNamed(
+                  context,
+                  '/modify',
+                  arguments: [onSubmit, task],
+                );
               },
               icon: const Icon(Icons.edit),
             ),
@@ -78,5 +82,21 @@ class TaskView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void onSubmit(
+    BuildContext context,
+    String title,
+    String description,
+    TimeOfDay time,
+  ) {
+    final taskProvider = Provider.of<TaskProvider>(context, listen: false);
+
+    task.dueTime = time;
+    task.taskName = title;
+    task.taskDescription = description;
+    
+    taskProvider.refresh();
+    Navigator.maybePop(context);
   }
 }
