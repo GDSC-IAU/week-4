@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list/project/constants/functions.dart';
 import 'package:todo_list/project/models/task_model.dart';
 import 'package:todo_list/project/providers/tasks_provider.dart';
 
@@ -15,7 +16,6 @@ class TaskView extends StatelessWidget {
   Widget build(BuildContext context) {
     final TaskProvider taskProvider =
         Provider.of<TaskProvider>(context, listen: false);
-    final TimeOfDay dueTime = task.dueTime;
 
     const boxDecoration = BoxDecoration(
       border: Border(
@@ -41,7 +41,7 @@ class TaskView extends StatelessWidget {
           ),
         ),
         subtitle: Text(
-          'Due at ${dueTime.hour.toString().padLeft(2, '0')}:${dueTime.minute.toString().padLeft(2, '0')}',
+          'Due at ${timeDayString(task.dueTime)}',
         ),
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
@@ -95,7 +95,7 @@ class TaskView extends StatelessWidget {
     task.dueTime = time;
     task.taskName = title;
     task.taskDescription = description;
-    
+
     taskProvider.refresh();
     Navigator.maybePop(context);
   }

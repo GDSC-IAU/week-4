@@ -9,7 +9,7 @@ class TaskProvider with ChangeNotifier {
     ),
     Task(
       taskName: 'Read a book',
-      dueTime: const TimeOfDay(hour: 19, minute: 59),
+      dueTime: const TimeOfDay(hour: 19, minute: 30),
     ),
     Task(
       taskName: 'Study Physics',
