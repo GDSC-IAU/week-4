@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:todo_list/project/models/task_model.dart';
 
 class TaskProvider with ChangeNotifier {
+  
   final List<Task> tasks = [
     Task(
       taskName: 'View Task App',
@@ -16,7 +17,6 @@ class TaskProvider with ChangeNotifier {
       dueTime: const TimeOfDay(hour: 15, minute: 59),
     ),
   ];
-  Task? selectedTask;
 
   void addTask(Task task) {
     tasks.add(task);

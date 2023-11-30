@@ -26,7 +26,6 @@ class HomeScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // _buildAppBar(),
                 const Padding(
                   padding: EdgeInsets.all(12.0),
                   child: Text(

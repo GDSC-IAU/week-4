@@ -54,12 +54,12 @@ class MainApp extends StatelessWidget {
   ThemeData getTheme() {
     final ThemeData theme = ThemeData();
     return theme.copyWith(
-      primaryColor: AppColors.primiaryColor,
+      primaryColor: AppColors.primaryColor,
       scaffoldBackgroundColor: AppColors.scaffoldBackground,
       appBarTheme: theme.appBarTheme.copyWith(
         centerTitle: true,
         elevation: 0,
-        foregroundColor: AppColors.primiaryColor,
+        foregroundColor: AppColors.primaryColor,
         backgroundColor: AppColors.scaffoldBackground,
       ),
       colorScheme: theme.colorScheme.copyWith(

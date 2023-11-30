@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:todo_list/project/constants/functions.dart';
+import 'package:todo_list/project/functions.dart';
 import 'package:todo_list/project/models/task_model.dart';
 import 'package:todo_list/project/providers/tasks_provider.dart';
 
@@ -47,14 +47,11 @@ class TaskView extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             IconButton(
-              onPressed: () {
-                taskProvider.selectedTask = task;
-                Navigator.pushNamed(
-                  context,
-                  '/modify',
-                  arguments: [onSubmit, task],
-                );
-              },
+              onPressed: () => Navigator.pushNamed(
+                context,
+                '/modify',
+                arguments: [onSubmit, task],
+              ),
               icon: const Icon(Icons.edit),
             ),
             IconButton(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:todo_list/project/constants/functions.dart';
+import 'package:todo_list/project/functions.dart';
 import 'package:todo_list/project/models/task_model.dart';
 import 'package:todo_list/project/widgets/custom_input_field.dart';
 
