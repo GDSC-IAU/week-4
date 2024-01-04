@@ -85,7 +85,7 @@ class ItemCard extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(width: 16)
+          const SizedBox(width: 16)
         ],
       ),
     );
