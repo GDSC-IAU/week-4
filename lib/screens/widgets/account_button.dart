@@ -8,7 +8,7 @@ class AccountButton extends StatelessWidget {
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => const account()),
+          MaterialPageRoute(builder: (context) => const AccountScreen()),
         );
       },
       child: Image.asset('lib/assets/images/account.png',

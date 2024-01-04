@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Todo {
   final String id;
@@ -41,5 +42,9 @@ class TodoProvider extends ChangeNotifier {
   void deleteTodo(String id) {
     _todos.removeWhere((todo) => todo.id == id);
     notifyListeners();
+  }
+
+  static TodoProvider of(BuildContext context, {bool listen = true}) {
+    return Provider.of<TodoProvider>(context, listen: listen);
   }
 }

@@ -1,9 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import './screens/splash_screen.dart';
+import './screens/TaskScreen.dart';
+
+import './provider/DarkModeProvider.dart';
 import './screens/TaskScreen.dart';
 import 'provider/TodoProvider.dart';
+
 void main() {
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => DarkModeProvider(),
+      child: MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -14,17 +25,17 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => TodoProvider(),
       child: MaterialApp(
-        title: 'Todo List App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          brightness: Brightness.light,
-        ),
-        darkTheme: ThemeData(
-          primarySwatch: Colors.blue,
-          brightness: Brightness.dark,
-        ),
-        home: const TaskScreen(), // Display your main screen directly
-      ),
+          title: 'Todo List App',
+          theme: ThemeData.light(), 
+          darkTheme: ThemeData.dark(), 
+          themeMode: Provider.of<DarkModeProvider>(context).isDarkMode
+              ? ThemeMode.dark
+              : ThemeMode.light,
+          home: SplashScreen(), 
+          routes: {
+            '/home': (context) => TaskScreen(),
+          }
+          ),
     );
   }
 }

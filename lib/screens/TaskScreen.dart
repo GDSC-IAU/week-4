@@ -23,11 +23,12 @@ class TaskScreen extends StatelessWidget {
 
   AppBar buildAppBar() {
     return AppBar(
+      backgroundColor: Colors.blue,
       title: Center(
         child: Text(
           'Todo List',
           style: GoogleFonts.lato(
-            color: Colors.black,
+            color: Colors.white,
             fontSize: 30.0,
             fontWeight: FontWeight.bold,
           ),
@@ -46,6 +47,18 @@ class TaskScreen extends StatelessWidget {
             child: User(),
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Center(
+            child: Text(
+              'Your Tasks:',
+              style: GoogleFonts.lato(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
         Expanded(
           child: buildTodoList(),
         ),
@@ -56,30 +69,38 @@ class TaskScreen extends StatelessWidget {
   Widget buildTodoList() {
     return Consumer<TodoProvider>(
       builder: (context, todoProvider, _) {
+        final todos = todoProvider.todos;
+
+        // Sort completed tasks to the bottom
+        todos.sort((a, b) => a.isCompleted == b.isCompleted ? 0 : a.isCompleted ? 1 : -1);
+
         return ListView.builder(
-          itemCount: todoProvider.todos.length,
+          itemCount: todos.length,
           itemBuilder: (context, index) {
-            final todo = todoProvider.todos[index];
-            return Container(
-              margin: EdgeInsets.all(8.0),
-              padding: EdgeInsets.all(16.0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10.0),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset(0, 3),
+            final todo = todos[index];
+
+            return GestureDetector(
+              onDoubleTap: () {
+                return 
+
+               _editTodoTitle(context, todo.id, 'New Title'); // todo double tap to edit title
+              },
+
+            
+              child: AnimatedContainer(
+                duration: Duration(milliseconds: 300),
+                margin: EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(16.0),
+                decoration: BoxDecoration(
+                  color: todo.isCompleted ? Color.fromARGB(255, 4, 50, 88) : const Color.fromARGB(255, 148, 201, 245),
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: TaskListItem(
+                  todo: Todo1(
+                    id: todo.id,
+                    title: todo.title,
+                    isCompleted: todo.isCompleted,
                   ),
-                ],
-              ),
-              child: TaskListItem(
-                todo: Todo1(
-                  id: todo.id,
-                  title: todo.title,
-                  isCompleted: todo.isCompleted,
                 ),
               ),
             );
@@ -88,6 +109,10 @@ class TaskScreen extends StatelessWidget {
       },
     );
   }
+
+void _editTodoTitle(BuildContext context, String todoId, String newTitle) {
+  Provider.of<TodoProvider>(context, listen: false).updateTodoTitle(todoId, newTitle);
+}
 
   FloatingActionButton buildFloatingActionButton(BuildContext context) {
     return FloatingActionButton(
@@ -100,7 +125,7 @@ class TaskScreen extends StatelessWidget {
   void showAddTaskDialog(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => AddTaskDialog(),
+      builder: (context) => const AddTaskDialog(),
     );
   }
 }
