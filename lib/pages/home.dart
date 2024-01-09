@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_list/provider/task_provider.dart';
+import 'package:todo_list/util/todo_tile.dart';
+import 'package:todo_list/models/task_model.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  final TextEditingController _textFieldController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    TaskProvider taskProvider = Provider.of<TaskProvider>(context);
     return Scaffold(
         backgroundColor: Color.fromARGB(255, 245, 245, 246),
         appBar: AppBar(
@@ -26,6 +33,7 @@ class HomePage extends StatelessWidget {
                   children: [
                     Expanded(
                       child: TextField(
+                        controller: _textFieldController,
                         decoration: InputDecoration(
                             hintText: 'add new tasks',
                             filled: true,
@@ -41,7 +49,26 @@ class HomePage extends StatelessWidget {
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Color.fromARGB(255, 68, 68, 68)),
                         onPressed: () {
-                          print('button pressed');
+                          String taskTitle = _textFieldController.text;
+                          if (taskTitle.isNotEmpty) {
+                            taskProvider.addTask(taskTitle); //add task
+                            _textFieldController.clear();
+                          } else {
+                            showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                        content:
+                                            Text('Plase enter a task title.'),
+                                        actions: [
+                                          TextButton(
+                                            onPressed: () {
+                                              Navigator.pop(context);
+                                            },
+                                            child: Text('OK'),
+                                          )
+                                        ]));
+                          }
+                          _textFieldController.clear();
                         },
                         child: const Text(
                           '+',
@@ -65,8 +92,24 @@ class HomePage extends StatelessWidget {
                     )
                   ],
                 )),
-            Container(
-              child: Center(child: Text('You haven\'t added any tasks yet')),
+            Center(
+                child: Visibility(
+              visible: taskProvider.allTasks.isEmpty,
+              child: const Text('You haven\t added any tasks yet'),
+            )),
+            Expanded(
+              child: Consumer<TaskProvider>(
+                builder: (context, TaskProvider, child) {
+                  return ListView.builder(
+                      itemCount: taskProvider.allTasks.length,
+                      itemBuilder: (context, index) {
+                        task Task = taskProvider.allTasks[index];
+                        return todo_tile(
+                          Task: Task,
+                        );
+                      });
+                },
+              ),
             )
           ],
         ));
