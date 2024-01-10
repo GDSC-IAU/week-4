@@ -13,7 +13,5 @@ a simple todo list app using flutter. The app use's the provider library for sta
 
 ## Screenshots
 
-<img src="images/homePage.jpeg" width="300"  alt="ui">
-
-<img src="images/Ui.jpeg" width="300"  alt="ui">
+<img src="images/homePage.jpeg" width="300"  alt="ui">  <img src="images/Ui.jpeg" width="300"  alt="ui">
 
