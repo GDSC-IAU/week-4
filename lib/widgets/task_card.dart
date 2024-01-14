@@ -28,9 +28,14 @@ class TaskCard extends StatelessWidget {
                 },
                 icon: icon,
               ),
-              Text(
-                task.title,
-                style: const TextStyle(color: Colors.white, fontSize: 20),
+              Flexible(
+                child: Text(
+                  task.title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                  ),
+                ),
               ),
             ],
           ),

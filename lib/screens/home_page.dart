@@ -142,6 +142,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         style: ButtonStyle(
+                          elevation: MaterialStateProperty.all<double>(0),
                           padding: MaterialStateProperty.all<EdgeInsets>(
                             const EdgeInsets.all(12),
                           ),
