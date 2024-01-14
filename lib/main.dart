@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:todo_list/providers/days_provider.dart';
+
+import 'screens/home_page.dart';
+
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(ChangeNotifierProvider(
+      create: (context) => DaysProvider(day: DateTime.now()),
+      child: const MainApp()));
 }
 
 class MainApp extends StatelessWidget {
@@ -9,13 +17,12 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Text("Hello World"),
-        ),
+      theme: ThemeData(
+        textTheme: GoogleFonts.poppinsTextTheme(),
       ),
+      home: const HomePage(),
     );
   }
 }
