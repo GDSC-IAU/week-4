@@ -1,20 +1,23 @@
 # Week 4: Introduction to State Management
 
+| ![Alt text](screenshots/1.png) | ![Alt text](screenshots/2.png) | ![Alt text](screenshots/3.png) |
+| ------------------------------ | ------------------------------ | ------------------------------ |
+
 ## Overview
 
 This week you will be learning about state management in Flutter. We will be focusing on the `provider` library and how to use it as a state management tool for your app.
 
 ## Learning Objectives
 
-* Understand the concept of state management
-* Understand the difference between stateful and stateless widgets
-* Understand how to use the `provider` library to manage state in your app
+- Understand the concept of state management
+- Understand the difference between stateful and stateless widgets
+- Understand how to use the `provider` library to manage state in your app
 
 ## Resources
 
-* [Provider Package](https://pub.dev/packages/provider)
-* [Simple State Management | Flutter](https://docs.flutter.dev/data-and-backend/state-mgmt/simple)
-* [Provider Introduction | Video](https://www.youtube.com/watch?v=uQuxrZE2dqA)
+- [Provider Package](https://pub.dev/packages/provider)
+- [Simple State Management | Flutter](https://docs.flutter.dev/data-and-backend/state-mgmt/simple)
+- [Provider Introduction | Video](https://www.youtube.com/watch?v=uQuxrZE2dqA)
 
 ## Project Overview
 
@@ -116,15 +119,15 @@ This week you will be creating a simple todo list app. The app must use the prov
 
 ### Requirements
 
-* All CRUD Operations must be applicable in the todo list (Create, Read, Update, Delete)
-* The app must use the provider library to manage state
-* Change the readme to document your app!
+- All CRUD Operations must be applicable in the todo list (Create, Read, Update, Delete)
+- The app must use the provider library to manage state
+- Change the readme to document your app!
 
 ### Bonus
 
-* Add a splash screen to your app
-* Add a dark mode to your app
-* Make a cool UI for your app
+- Add a splash screen to your app
+- Add a dark mode to your app
+- Make a cool UI for your app
 
 ### UI Inspiration
 
