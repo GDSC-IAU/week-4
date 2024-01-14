@@ -4,6 +4,7 @@ import 'package:todo_list/helpers/constants.dart';
 import 'package:todo_list/models/task.dart';
 import 'package:todo_list/providers/days_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list/screens/task_page.dart';
 import 'package:todo_list/widgets/day_card.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -129,9 +130,12 @@ class _HomePageState extends State<HomePage> {
                       child: ElevatedButton.icon(
                         onPressed: () {
                           setState(() {
-                            daysProvider.addTask(Task(title: myController.text),
-                                daysProvider.days[_selectedIndex]);
-                            myController.clear();
+                            if (myController.text.isNotEmpty) {
+                              daysProvider.addTask(
+                                  Task(title: myController.text),
+                                  daysProvider.days[_selectedIndex]);
+                              myController.clear();
+                            }
                           });
                         },
                         icon: const Icon(Icons.add),
@@ -180,11 +184,22 @@ class _HomePageState extends State<HomePage> {
                           motion: const ScrollMotion(),
                           children: [
                             Constants.w4,
-                            const SlidableAction(
-                              onPressed: null,
+                            SlidableAction(
+                              onPressed: (BuildContext context) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TaskPage(
+                                      task: daysProvider
+                                          .days[_selectedIndex].tasks[index],
+                                    ),
+                                  ),
+                                );
+                              },
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
-                              backgroundColor: Color.fromRGBO(81, 194, 146, 1),
+                                  const BorderRadius.all(Radius.circular(8)),
+                              backgroundColor:
+                                  const Color.fromRGBO(81, 194, 146, 1),
                               foregroundColor: Colors.white,
                               icon: Icons.edit,
                               label: 'Update',

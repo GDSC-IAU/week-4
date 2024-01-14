@@ -8,4 +8,8 @@ class Task {
   void toggleDone() {
     isDone = !isDone;
   }
+
+  void updateTitle(String title) {
+    this.title = title;
+  }
 }

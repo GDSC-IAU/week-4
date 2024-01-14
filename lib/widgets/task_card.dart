@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todo_list/helpers/constants.dart';
 import 'package:todo_list/models/task.dart';
 import 'package:todo_list/providers/days_provider.dart';
 
@@ -28,6 +29,7 @@ class TaskCard extends StatelessWidget {
                 },
                 icon: icon,
               ),
+              Constants.w8,
               Flexible(
                 child: Text(
                   task.title,

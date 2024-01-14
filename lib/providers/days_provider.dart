@@ -37,7 +37,7 @@ class DaysProvider extends ChangeNotifier {
   }
 
   void updateTask(Task task, String title) {
-    task.title = title;
+    task.updateTitle(title);
     notifyListeners();
   }
 }
